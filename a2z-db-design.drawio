@@ -1,15 +1,15 @@
 <mxfile host="65bd71144e">
     <diagram id="fxuSIED1SjDL8QW2SAAC" name="academic">
-        <mxGraphModel dx="840" dy="478" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="1">
+        <mxGraphModel dx="840" dy="390" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="75" value="sessions" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;labelBackgroundColor=none;fontColor=#ffffff;strokeColor=#001DBC;strokeWidth=2;fillColor=#0050ef;fontSize=19;" vertex="1" parent="1">
-                    <mxGeometry x="32" y="33" width="256" height="279" as="geometry">
-                        <mxRectangle x="32" y="33" width="208" height="30" as="alternateBounds"/>
+                    <mxGeometry x="18" y="17" width="256" height="279" as="geometry">
+                        <mxRectangle x="18" y="17" width="208" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="76" value="pk   id (bigint)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="75">
+                <mxCell id="76" value="pk   session_id (bigint)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="75">
                     <mxGeometry y="30" width="256" height="36" as="geometry"/>
                 </mxCell>
                 <mxCell id="80" value="      session_name (string)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="75">
@@ -29,6 +29,28 @@
                 </mxCell>
                 <mxCell id="84" value="      desctiption (string)" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="75">
                     <mxGeometry y="242" width="256" height="37" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="classes" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;labelBackgroundColor=none;fontColor=#ffffff;strokeColor=#001DBC;strokeWidth=2;fillColor=#0050ef;fontSize=19;" vertex="1" parent="1">
+                    <mxGeometry x="376" y="17" width="256" height="140" as="geometry">
+                        <mxRectangle x="376" y="17" width="208" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="88" value="pk   class_id (bigint)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="87">
+                    <mxGeometry y="30" width="256" height="36" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="      class_name (string)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="87">
+                    <mxGeometry y="66" width="256" height="37" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" value="fk    session_id(bigint)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="87">
+                    <mxGeometry y="103" width="256" height="37" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Helvetica;fontSize=19;fontColor=#F0F0F0;strokeColor=#000000;strokeWidth=2;endArrow=ERzeroToMany;endFill=0;endSize=12;startArrow=ERmandOne;startFill=0;targetPerimeterSpacing=12;sourcePerimeterSpacing=12;startSize=12;" edge="1" parent="1" source="76" target="93">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="332" y="65"/>
+                            <mxPoint x="332" y="139"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
