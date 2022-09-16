@@ -1,0 +1,8 @@
+
+/// run a specific seeder 
+php artisan db:seed --class=AdminSeeder
+ 
+// create migration file in specific folder
+php artisan make:migration create_roles_table --path="/app/database/migrations/users"
+// run migration file of a specific folder
+ php artisan migrate --path=/database/migrations/users
