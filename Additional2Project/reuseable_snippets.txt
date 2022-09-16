@@ -13,3 +13,6 @@ $user = DB::table('users')->where('name', 'John')->first();
 
 /// If you don't need an entire row, you may extract a single value from a record using the value method. 
 $email = DB::table('users')->where('name', 'John')->value('email');
+
+// update permissions
+php artisan db:seed --class=PermissionSeeder      

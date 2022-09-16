@@ -2,5 +2,12 @@
 ## Role
 =======================================================================================
 => migration      : database\migrations\2022_09_16_121538_create_roles_table.php
-=> controller     : app\Http\Controllers\users\RoleController.php
+=> controller     : app\Http\Controllers\controluser\RoleController.php
+=> routes         : routes\api.php
+
+
+## Permission
+=======================================================================================
+=> migration      : database\migrations\2022_09_16_163502_create_permissions_table.php
+=> controller     : app\Http\Controllers\controluser\PermissionController.php
 => routes         : routes\api.php
