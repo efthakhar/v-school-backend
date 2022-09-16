@@ -2,7 +2,14 @@
 /// run a specific seeder 
 php artisan db:seed --class=AdminSeeder
  
-// create migration file in specific folder
+/// create migration file in specific folder
 php artisan make:migration create_roles_table --path="/app/database/migrations/users"
-// run migration file of a specific folder
- php artisan migrate --path=/database/migrations/users
+
+/// run migration file of a specific folder
+php artisan migrate --path=/database/migrations/users
+
+/// If you just need to retrieve a single row from a database table,
+$user = DB::table('users')->where('name', 'John')->first();
+
+/// If you don't need an entire row, you may extract a single value from a record using the value method. 
+$email = DB::table('users')->where('name', 'John')->value('email');

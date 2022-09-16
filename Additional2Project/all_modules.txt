@@ -3,4 +3,4 @@
 =======================================================================================
 => migration      : database\migrations\2022_09_16_121538_create_roles_table.php
 => controller     : app\Http\Controllers\users\RoleController.php
-=> routes         : database\migrations\2022_09_16_121538_create_roles_table.php
+=> routes         : routes\api.php
