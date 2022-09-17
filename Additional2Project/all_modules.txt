@@ -5,6 +5,11 @@
 => controller     : app\Http\Controllers\controluser\RoleController.php
 => routes         : routes\api.php
 
+## Users_Roles
+=======================================================================================
+=> migration      : database\migrations\2022_09_17_122019_create_users_roles_table.php
+=> controller     : app\Http\Controllers\controluser\UserRoleController.php
+=> routes         : routes\api.php
 
 ## Permission
 =======================================================================================

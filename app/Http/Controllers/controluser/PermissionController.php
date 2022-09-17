@@ -11,14 +11,12 @@ class PermissionController extends Controller
 {
    function index()
    {
-
+        /// serving data from cache 
         $permissions = Cache::rememberForever('permissions', function () { 
             return DB::table('permissions')->orderBy('permission_id')->get();
         });
-
-            // $permissions = DB::table('permissions')
-            //                 ->orderBy('permission_id')
-            //                 ->get();
+        
+         // $permissions = DB::table('permissions')->orderBy('permission_id')->get();
             
         return response()->json($permissions);
    }

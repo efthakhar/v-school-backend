@@ -1,0 +1,9 @@
+
+17 September:
+==============
+Create users_roles, roles_permissions table,migration,controllers and api 
+Create user controller, api 
+
+18 - 19 September:
+==============
+Apply laravel sanctum api, create permission check and Make vue js User, Roles , permission views
