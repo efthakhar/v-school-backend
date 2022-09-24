@@ -22,12 +22,15 @@ class AuthController extends Controller
 
         try{
 
-            $userService->createUser($user_info);
+            if($userService->createUser($user_info)){
 
-            if (Auth::attempt($request->only(['email', 'password']))) {
-                return response(["success" => true], 200);
-            } else {
-                return response(["success" => false], 403);
+                if (Auth::attempt($request->only(['email', 'password']))) {
+                    $request->session()->regenerate();
+                    return response()->json(["success" => true, 'user'=> Auth::user()], 200);
+                } else {
+                    return  response()->json(["success" => false], 403);
+                }
+
             }
 
         }catch(Exception $e){
@@ -40,9 +43,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt($request->only(['email', 'password']))) {
-            return response(["success" => true], 200);
+            $request->session()->regenerate();
+            return response()->json(["success" => true, 'user'=> Auth::user()], 200);
         } else {
-            return response(["success" => false], 403);
+            return  response()->json(["success" => false], 403);
         }
     }
 
