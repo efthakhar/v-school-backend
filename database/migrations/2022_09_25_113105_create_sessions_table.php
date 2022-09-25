@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
 
-            $table->id('session_id');
-            $table->string('session_name');
-            $table->string('session_code');
-            $table->string('session_description');
+            $table->id();
+            $table->string('session_name')->unique();
+            $table->string('session_code')->unique();
+            $table->string('session_description')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('active_status'); 
-                             
+            $table->boolean('active_status')->nullable(); 
+
         });
     }
 

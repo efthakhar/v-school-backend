@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\academic\SessionController;
 use App\Http\Controllers\controluser\PermissionController;
 use App\Http\Controllers\controluser\RoleController;
 use App\Http\Controllers\controluser\RolePermissionController;
@@ -8,11 +9,6 @@ use App\Http\Controllers\controluser\UserRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::group(['middleware' =>'auth:sanctum'], function() {
 
@@ -50,8 +46,12 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
 
 });
 
-
-
+// Session
+Route::get('/sessions',[SessionController::class,'index']);
+Route::get('/sessions/{id}',[SessionController::class,'show']);
+Route::post('/sessions',[SessionController::class,'store']);
+Route::put('/sessions/{id}',[SessionController::class,'update']);
+Route::delete('/sessions/{id}',[SessionController::class,'delete']);
 
 
 
