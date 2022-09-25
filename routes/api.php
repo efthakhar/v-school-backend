@@ -24,6 +24,28 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::put('/users/{id}',[UserController::class,'update']);
     Route::delete('/users/{id}',[UserController::class,'delete']);
 
+    // Role 
+    Route::get('/roles',[RoleController::class,'index']);
+    Route::get('/roles/{id}',[RoleController::class,'show']);
+    Route::post('/roles',[RoleController::class,'store']);
+    Route::put('/roles/{id}',[RoleController::class,'update']);
+    Route::delete('/roles/{id}',[RoleController::class,'delete']);
+
+    // Role_Users
+    Route::get('/users-roles/user/{user_id}',[UserRoleController::class,'getRoleIdByUserId']);
+    Route::get('/users-roles/users/{role_id}',[UserRoleController::class,'getUsersIdsByRoleId']);
+    Route::post('/users-roles',[UserRoleController::class,'assignRoleToUser']);
+    Route::put('/users-roles',[UserRoleController::class,'updateRoleToUser']);
+    Route::delete('/users-roles/{user_id}',[UserRoleController::class,'deleteUserAndRole']);
+
+    // Role_Permission
+    Route::get('/roles_permissions/{id}',[RolePermissionController::class,'index']);
+    Route::post('/roles_permissions',[RolePermissionController::class,'store']);
+    Route::delete('/roles_permissions/{id}',[RolePermissionController::class,'delete']);
+
+    // Permission
+    Route::get('/permissions',[PermissionController::class,'index']);
+
     
 
 });
@@ -33,24 +55,6 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
 
 
 
-// Role 
-Route::get('/roles',[RoleController::class,'index']);
-Route::get('/roles/{id}',[RoleController::class,'show']);
-Route::post('/roles',[RoleController::class,'store']);
-Route::put('/roles/{id}',[RoleController::class,'update']);
-Route::delete('/roles/{id}',[RoleController::class,'delete']);
 
-// Role_Users
-Route::get('/users-roles/user/{user_id}',[UserRoleController::class,'getRoleIdByUserId']);
-Route::get('/users-roles/users/{role_id}',[UserRoleController::class,'getUsersIdsByRoleId']);
-Route::post('/users-roles',[UserRoleController::class,'assignRoleToUser']);
-Route::put('/users-roles',[UserRoleController::class,'updateRoleToUser']);
-Route::delete('/users-roles/{user_id}',[UserRoleController::class,'deleteUserAndRole']);
 
-// Role_Permission
-Route::get('/roles_permissions/{id}',[RolePermissionController::class,'index']);
-Route::post('/roles_permissions',[RolePermissionController::class,'store']);
-Route::delete('/roles_permissions/{id}',[RolePermissionController::class,'delete']);
 
-// Permission
-Route::get('/permissions',[PermissionController::class,'index']);
