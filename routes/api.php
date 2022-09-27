@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\academic\ClassController;
 use App\Http\Controllers\academic\SessionController;
 use App\Http\Controllers\controluser\PermissionController;
 use App\Http\Controllers\controluser\RoleController;
@@ -42,19 +43,26 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     // Permission
     Route::get('/permissions',[PermissionController::class,'index']);
 
+    // Session
+    Route::get('/sessions',[SessionController::class,'index']);
+    Route::get('/sessions/{id}',[SessionController::class,'show']);
+    Route::post('/sessions',[SessionController::class,'store']);
+    Route::put('/sessions/{id}',[SessionController::class,'update']);
+    Route::delete('/sessions/{id}',[SessionController::class,'delete']);
+
     
 
 });
 
-// Session
-Route::get('/sessions',[SessionController::class,'index']);
-Route::get('/sessions/{id}',[SessionController::class,'show']);
-Route::post('/sessions',[SessionController::class,'store']);
-Route::put('/sessions/{id}',[SessionController::class,'update']);
-Route::delete('/sessions/{id}',[SessionController::class,'delete']);
 
 
 
 
+    // Class
+    Route::get('/classes',[ClassController::class,'index']);
+    Route::get('/classes/{id}',[ClassController::class,'show']);
+    Route::post('/classes',[ClassController::class,'store']);
+    Route::put('/classes/{id}',[ClassController::class,'update']);
+    Route::delete('/classes/{id}',[ClassController::class,'delete']);
 
 

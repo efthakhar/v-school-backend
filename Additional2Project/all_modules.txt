@@ -30,3 +30,10 @@
 => migration      : database\migrations\2022_09_16_163502_create_permissions_table.php
 => controller     : app\Http\Controllers\controluser\PermissionController.php
 => routes         : routes\api.php
+
+
+## Session
+=======================================================================================
+=> migration      : database\migrations\2022_09_25_113105_create_sessions_table.php
+=> controller     : database\migrations\2022_09_25_113105_create_sessions_table.php
+=> routes         : routes\api.php 
