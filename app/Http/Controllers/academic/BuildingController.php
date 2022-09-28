@@ -4,59 +4,55 @@ namespace App\Http\Controllers\academic;
 
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-
-class ClassController extends Controller
+class BuildingController extends Controller
 {
     public function index()
     {
-            $classes =  DB::table('classes')
-            ->join('sessions', 'sessions.id', '=', 'classes.session_id')
-            ->select('classes.*', 'sessions.session_name')
-            ->paginate(10);
+            $buildings =  DB::table('buildings')->paginate(10);
             
-            return response()->json($classes);
+            return response()->json($buildings);
     }
 
-    public function show($class_id)
+    public function show($building_id)
     {
-            $class = DB::table('classes')
-            ->join('sessions', 'sessions.id', '=', 'classes.session_id')
-            ->select('classes.*', 'sessions.session_name')
-            ->where('classes.id',$class_id)
-            ->first();
-            return response()->json($class);
+            $building =  DB::table('buildings')
+                          ->where('id',$building_id)
+                          ->first();           
+            return response()->json($building);
     }
+
 
     public function store(Request $request)
     {   
             $validator = Validator::make($request->all(), [
-                'class_name' => 'required|max:255',
-                'session_id' => 'required',
+                'building_name'     => 'required|max:255|unique:buildings',
+                'building_location' => 'max:255',
             ]);
 
             if(!$validator->fails())
             {
 
                 try{
-                    $created = DB::table('classes')->insert([
-                        'class_name' => $request->class_name,  
-                        'session_id' => $request->session_id,  
+                    $created = DB::table('buildings')->insert([
+                        'building_name' => $request->building_name,  
+                        'building_location' => $request->building_location,        
                     ]);
 
                     return response()->json([
                         'success' => true, 
-                        'message' => 'class created successfully'
+                        'message' => 'building added successfully'
                     ],201);
 
                 }catch(Exception $e){
 
                     return response()->json([
                         'success' => false, 
-                        'message' => 'class fail to create. Databse error occured',
+                        'message' => 'Databse error occured',
                         'errors'  => $e
                     ],500);
                 }
@@ -72,34 +68,35 @@ class ClassController extends Controller
             }
     }
 
-    public function update(Request $request,$class_id)
+    public function update(Request $request,$building_id)
     {   
+        
             $validator = Validator::make($request->all(), [
-                'class_name' => 'required|max:255',
-                'session_id' => 'required',
+                'building_name' => ['required','max:255',Rule::unique('buildings')->ignore($building_id)],
+                'building_location' => 'max:255',
             ]);
 
             if(!$validator->fails())
             {
 
                 try{
-                    $created = DB::table('classes')
-                    ->where('id',$class_id)
+                    $created = DB::table('buildings')
+                    ->where('id',$building_id)
                     ->update([
-                        'class_name' => $request->class_name,  
-                        'session_id' => $request->session_id,  
+                        'building_name' => $request->building_name,  
+                        'building_location' => $request->building_location,        
                     ]);
 
                     return response()->json([
                         'success' => true, 
-                        'message' => 'class updated successfully'
-                    ],200);
+                        'message' => 'building updated successfully'
+                    ],201);
 
                 }catch(Exception $e){
 
                     return response()->json([
                         'success' => false, 
-                        'message' => 'class fail to update. Databse error occured',
+                        'message' => 'Databse error occured',
                         'errors'  => $e
                     ],500);
                 }
@@ -115,21 +112,23 @@ class ClassController extends Controller
             }
     }
 
-    public function delete($class_id)
+
+    public function delete($building_id)
     {
-        $deleted = DB::table('classes')
-                   ->where('id',$class_id)->delete();
+        $deleted = DB::table('buildings')
+                   ->where('id',$building_id)->delete();
         if($deleted){
             return response()->json([
                 'success' => true,
-                'message' => 'class deleted'
+                'message' => 'building deleted'
             ]);
         }else{
             return response()->json([
                 'success' => false,
-                'message' => 'class not deleted'
+                'message' => 'building not deleted'
             ]);
         }           
     }
+
 
 }

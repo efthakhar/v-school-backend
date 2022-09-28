@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\academic\BuildingController;
 use App\Http\Controllers\academic\ClassController;
 use App\Http\Controllers\academic\SessionController;
 use App\Http\Controllers\controluser\PermissionController;
@@ -51,18 +52,24 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::delete('/sessions/{id}',[SessionController::class,'delete']);
 
     
-
-});
-
-
-
-
-
     // Class
     Route::get('/classes',[ClassController::class,'index']);
     Route::get('/classes/{id}',[ClassController::class,'show']);
     Route::post('/classes',[ClassController::class,'store']);
     Route::put('/classes/{id}',[ClassController::class,'update']);
     Route::delete('/classes/{id}',[ClassController::class,'delete']);
+
+});
+
+    
+    // Building
+    Route::get('/buildings',[BuildingController::class,'index']);
+    Route::get('/buildings/{id}',[BuildingController::class,'show']);
+    Route::post('/buildings',[BuildingController::class,'store']);
+    Route::put('/buildings/{id}',[BuildingController::class,'update']);
+    Route::delete('/buildings/{id}',[BuildingController::class,'delete']);
+
+
+
 
 
