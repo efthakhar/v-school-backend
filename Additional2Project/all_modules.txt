@@ -35,5 +35,12 @@
 ## Session
 =======================================================================================
 => migration      : database\migrations\2022_09_25_113105_create_sessions_table.php
-=> controller     : database\migrations\2022_09_25_113105_create_sessions_table.php
+=> controller     : app\Http\Controllers\academic\SessionController.php
+=> routes         : routes\api.php 
+
+
+## Classes
+=======================================================================================
+=> migration      : database\migrations\2022_09_25_113105_create_sessions_table.php
+=> controller     : app\Http\Controllers\academic\ClassController.php
 => routes         : routes\api.php 

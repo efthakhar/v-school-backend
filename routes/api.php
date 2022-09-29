@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\academic\BuildingController;
 use App\Http\Controllers\academic\ClassController;
+use App\Http\Controllers\academic\RoomController;
 use App\Http\Controllers\academic\SessionController;
 use App\Http\Controllers\controluser\PermissionController;
 use App\Http\Controllers\controluser\RoleController;
@@ -58,9 +59,6 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::post('/classes',[ClassController::class,'store']);
     Route::put('/classes/{id}',[ClassController::class,'update']);
     Route::delete('/classes/{id}',[ClassController::class,'delete']);
-
-});
-
     
     // Building
     Route::get('/buildings',[BuildingController::class,'index']);
@@ -69,6 +67,16 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::put('/buildings/{id}',[BuildingController::class,'update']);
     Route::delete('/buildings/{id}',[BuildingController::class,'delete']);
 
+});
+
+    
+
+// Rooms
+Route::get('/rooms',[RoomController::class,'index']);
+Route::get('/rooms/{id}',[RoomController::class,'show']);
+Route::post('/rooms',[RoomController::class,'store']);
+Route::put('/rooms/{id}',[RoomController::class,'update']);
+Route::delete('/rooms/{id}',[RoomController::class,'delete']);
 
 
 

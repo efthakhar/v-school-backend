@@ -13,7 +13,9 @@ class BuildingController extends Controller
 {
     public function index()
     {
-            $buildings =  DB::table('buildings')->paginate(10);
+            $buildings =  DB::table('buildings')
+                            ->orderBy('id','desc')
+                            ->paginate(10);
             
             return response()->json($buildings);
     }
