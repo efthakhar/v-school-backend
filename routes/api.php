@@ -62,14 +62,20 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     
     // Building
     Route::get('/buildings',[BuildingController::class,'index']);
+    Route::get('/buildings/all',[BuildingController::class,'getAll']);
     Route::get('/buildings/{id}',[BuildingController::class,'show']);
     Route::post('/buildings',[BuildingController::class,'store']);
     Route::put('/buildings/{id}',[BuildingController::class,'update']);
     Route::delete('/buildings/{id}',[BuildingController::class,'delete']);
 
+    
+    
+
+
 });
 
     
+
 
 // Rooms
 Route::get('/rooms',[RoomController::class,'index']);
@@ -77,7 +83,4 @@ Route::get('/rooms/{id}',[RoomController::class,'show']);
 Route::post('/rooms',[RoomController::class,'store']);
 Route::put('/rooms/{id}',[RoomController::class,'update']);
 Route::delete('/rooms/{id}',[RoomController::class,'delete']);
-
-
-
 

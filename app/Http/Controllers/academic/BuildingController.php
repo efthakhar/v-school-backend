@@ -19,6 +19,14 @@ class BuildingController extends Controller
             
             return response()->json($buildings);
     }
+    public function getAll()
+    {
+            $buildings =  DB::table('buildings')
+                            ->orderBy('building_name','asc')
+                            ->get();
+            
+            return response()->json($buildings);
+    }
 
     public function show($building_id)
     {

@@ -14,9 +14,9 @@ class ClassController extends Controller
     public function index()
     {
             $classes =  DB::table('classes')
-            ->join('sessions', 'sessions.id', '=', 'classes.session_id')
+            ->leftJoin('sessions', 'sessions.id', '=', 'classes.session_id')
             ->select('classes.*', 'sessions.session_name')
-            ->paginate(10);
+            ->paginate();
             
             return response()->json($classes);
     }

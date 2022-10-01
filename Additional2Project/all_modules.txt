@@ -44,3 +44,16 @@
 => migration      : database\migrations\2022_09_25_113105_create_sessions_table.php
 => controller     : app\Http\Controllers\academic\ClassController.php
 => routes         : routes\api.php 
+
+
+## Buildings
+=======================================================================================
+=> migration      : database\migrations\2022_09_28_161628_create_buildings_table.php
+=> controller     : app\Http\Controllers\academic\BuildingController.php
+=> routes         : routes\api.php 
+
+## Rooms
+=======================================================================================
+=> migration      : database\migrations\2022_09_29_131117_create_rooms_table.php
+=> controller     : app\Http\Controllers\academic\RoomController.php
+=> routes         : routes\api.php 

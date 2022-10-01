@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\academic;
 
 use App\Http\Controllers\Controller;
-use Exception;
+use App\Rules\CombineUnique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
 
 class RoomController extends Controller
 {
@@ -33,47 +34,63 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {     
+        $validator = Validator::make($request->all(), [
 
-        $count = DB::table('rooms')->where([
-            ['room_no',$request->room_no],
-            ['building_id', $request->building_id],
-        ])->count();
+            'room_no' =>
+            [
+                new CombineUnique(
+                    [
+                        ['room_no',$request->room_no],
+                        ['building_id',$request->building_id],
+                    ],
+                    'rooms',
+                    'room no and bulding name must be unique combinely to create'
+                ),
+                'max:255',
+                'required'
+            ],
+            'building_id' => [ 'required', 'max:255' ]
 
-        if($count>0){
-
-            return response()->json([
-                'success' => false, 
-                'message' => 'room fail to create',
-                'errors' => [
-                    'room_name'=>'room name duplicated',
-                    'building_name'=>'building name duplicated',
-                ] 
-            ],401);
-
-        }
-
-        $created = DB::table('rooms')->insert([
-            'room_name' => $request->room_name,  
-            'room_no' => $request->room_no,  
-            'building_id' => $request->building_id,              
         ]);
+       
 
-        if($created){
+       
+        if(!$validator->fails()){
 
-            return response()->json([
-                'success' => true, 
-                'message' => 'room created successfully'
-            ],201);
+            $created = DB::table('rooms')->insert([
+                'room_name' => $request->room_name,  
+                'room_no' => $request->room_no,  
+                'building_id' => $request->building_id,              
+            ]);
+    
+            if($created){
+    
+                return response()->json([
+                    'success' => true, 
+                    'message' => 'room created successfully'
+                ],201);
+    
+            }else{
+    
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'room fail to create. Databse error occured',
+                    'errors'  => 'server error'
+                ],500);
+    
+            }        
 
         }else{
 
             return response()->json([
                 'success' => false, 
-                'message' => 'room fail to create. Databse error occured',
-                'errors'  => 'server error'
-            ],500);
+                'message' => 'room fail to create',
+                'errors' => $validator->errors()
+            ],401);
 
-        }         
+
+        }
+   
             
     }
 
@@ -82,48 +99,65 @@ class RoomController extends Controller
     public function update(Request $request,$room_id)
     {     
 
-        $count = DB::table('rooms')->where([
-            ['room_no',$request->room_no],
-            ['building_id', $request->building_id],
-        ])->count();
+        $validator = Validator::make($request->all(), [
 
-        if($count>0){
+            'room_no' =>
+            [
+                new CombineUnique(
+                    [
+                        ['room_no',$request->room_no],
+                        ['building_id',$request->building_id],
+                    ],
+                    'rooms',
+                    'room no and bulding name must be unique combinely to update',
+                    $room_id
+                ),
+                'max:255',
+                'required'
+            ],
+            'building_id' => [ 'required', 'max:255' ]
 
-            return response()->json([
-                'success' => false, 
-                'message' => 'room fail to update',
-                'errors' => [
-                    'room_name'=>'room name duplicated',
-                    'building_name'=>'building name duplicated',
-                ] 
-            ],401);
+        ]);
 
-        }
+       
+        if(!$validator->fails()){
 
-        $updated = DB::table('rooms')
-                ->where('id',$room_id)
-                ->update([
-                    'room_name' => $request->room_name,  
-                    'room_no' => $request->room_no,  
-                    'building_id' => $request->building_id,              
-                ]);
-
-        if($updated){
-
-            return response()->json([
-                'success' => true, 
-                'message' => 'room updated successfully'
-            ],201);
+            $created = DB::table('rooms')
+            ->where('id',$room_id)
+            ->update([
+                'room_name' => $request->room_name,  
+                'room_no' => $request->room_no,  
+                'building_id' => $request->building_id,              
+            ]);
+    
+            if($created){
+    
+                return response()->json([
+                    'success' => true, 
+                    'message' => 'room updated successfully'
+                ],201);
+    
+            }else{
+    
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'room fail to update. Databse error occured',
+                    'errors'  => 'server error'
+                ],500);
+    
+            }        
 
         }else{
 
             return response()->json([
                 'success' => false, 
-                'message' => 'room fail to update. Databse error occured',
-                'errors'  => 'server error'
-            ],500);
+                'message' => 'room fail to update',
+                'errors' => $validator->errors()
+            ],401);
 
-        }         
+
+        }
+   
             
     }
 

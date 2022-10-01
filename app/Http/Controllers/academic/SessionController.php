@@ -119,9 +119,13 @@ class SessionController extends Controller
 
     public function delete($session_id)
     {
-        $deleted = DB::table('sessions')
+        $session_deleted = DB::table('sessions')
                    ->where('id',$session_id)->delete();
-        if($deleted){
+
+        $classes_deleted = DB::table('classes')
+        ->where('session_id',$session_id)->delete();  
+
+        if( $session_deleted && $classes_deleted){
             return response()->json([
                 'success' => true,
                 'message' => 'session deleted'
