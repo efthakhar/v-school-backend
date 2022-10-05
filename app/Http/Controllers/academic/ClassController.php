@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\academic;
 
 use App\Http\Controllers\Controller;
+use App\Rules\CombineUnique;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,12 +12,17 @@ use Illuminate\Support\Facades\Validator;
 
 class ClassController extends Controller
 {
-    public function index()
-    {
+    public function index(Request $request)
+    {         
+            $session_id = $request->query('session');
+
             $classes =  DB::table('classes')
             ->leftJoin('sessions', 'sessions.id', '=', 'classes.session_id')
             ->select('classes.*', 'sessions.session_name')
-            ->paginate();
+            ->when($session_id,function($query,$session_id){
+                $query->where('session_id',$session_id);
+            })
+            ->paginate(10);
             
             return response()->json($classes);
     }
@@ -33,10 +39,29 @@ class ClassController extends Controller
 
     public function store(Request $request)
     {   
-            $validator = Validator::make($request->all(), [
-                'class_name' => 'required|max:255',
+            $validator = Validator::make($request->all(), 
+            [
+                'class_name' => 
+                [
+                    new CombineUnique(
+                        [
+                            ['class_name',$request->class_name],
+                            ['session_id',$request->session_id],
+                        ],
+                        'classes',
+                        'There can not two same name class under same session'
+                    ),
+                    'max:255',
+                    'required'
+                ],
+
                 'session_id' => 'required',
-            ]);
+            ],
+            [ 
+                'class_name.required' => ':attribute field can not be empty',
+                'session_id.required' => 'session name is required',
+            ]
+            );
 
             if(!$validator->fails())
             {

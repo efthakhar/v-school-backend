@@ -47,6 +47,7 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
 
     // Session
     Route::get('/sessions',[SessionController::class,'index']);
+    Route::get('/sessions/list',[SessionController::class,'list']);
     Route::get('/sessions/{id}',[SessionController::class,'show']);
     Route::post('/sessions',[SessionController::class,'store']);
     Route::put('/sessions/{id}',[SessionController::class,'update']);

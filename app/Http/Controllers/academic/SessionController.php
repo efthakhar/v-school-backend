@@ -13,7 +13,14 @@ class SessionController extends Controller
 {
     public function index()
     {
-            $sessions =  DB::table('sessions')->get()->keyBy('id');
+            $sessions =  DB::table('sessions')
+                        ->orderBy('id','desc')
+                        ->paginate(10);
+            return response()->json($sessions);
+    }
+    public function list()
+    {
+            $sessions =  DB::table('sessions')->get();
             return response()->json($sessions);
     }
 
@@ -48,14 +55,14 @@ class SessionController extends Controller
                     return response()->json([
                         'success' => true, 
                         'message' => 'session created successfully'
-                    ]);
+                    ],201);
 
                 }catch(Exception $e){
 
                     return response()->json([
                         'success' => false, 
                         'message' => 'session fail to create. Errors: '.$e
-                    ]);
+                    ],500);
                 }
                 
             }else{
@@ -64,7 +71,7 @@ class SessionController extends Controller
                     'success' => false, 
                     'message' => 'validation error occured',
                     'errors'  => $validator->errors(),
-                ]);
+                ],401);
 
             }
     }
@@ -96,14 +103,14 @@ class SessionController extends Controller
                     return response()->json([
                         'success' => true, 
                         'message' => 'session updated successfully'
-                    ]);
+                    ],201);
 
                 }catch(Exception $e){
 
                     return response()->json([
                         'success' => false, 
                         'message' => 'session fail to update. Errors: '.$e
-                    ]);
+                    ],500);
                 }
                 
             }else{
@@ -112,7 +119,7 @@ class SessionController extends Controller
                     'success' => false, 
                     'message' => 'validation error occured',
                     'errors'  => $validator->errors(),
-                ]);
+                ],401);
 
             }
     }

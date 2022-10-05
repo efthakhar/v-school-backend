@@ -17,7 +17,7 @@ class RoomController extends Controller
                         ->join('buildings','buildings.id','=','rooms.building_id')
                         ->select('rooms.*','buildings.building_name')
                         ->orderBy('id','desc')
-                        ->paginate(10);
+                        ->paginate(3);
             
             return response()->json($rooms);
     }
@@ -57,7 +57,7 @@ class RoomController extends Controller
        
         if(!$validator->fails()){
 
-            $created = DB::table('rooms')->insert([
+            $created = DB::table('rooms')->insertGetId([
                 'room_name' => $request->room_name,  
                 'room_no' => $request->room_no,  
                 'building_id' => $request->building_id,              
@@ -67,7 +67,13 @@ class RoomController extends Controller
     
                 return response()->json([
                     'success' => true, 
-                    'message' => 'room created successfully'
+                    'message' => 'room created successfully',
+                    'data' =>  [
+                        'id' => $created,
+                        'room_name' => $request->room_name,  
+                        'room_no' => $request->room_no,  
+                        'building_id' => $request->building_id,              
+                    ]
                 ],201);
     
             }else{
