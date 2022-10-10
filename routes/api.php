@@ -54,12 +54,12 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::delete('/sessions/{id}',[SessionController::class,'delete']);
 
     
-    // Class
-    Route::get('/classes',[ClassController::class,'index']);
-    Route::get('/classes/{id}',[ClassController::class,'show']);
-    Route::post('/classes',[ClassController::class,'store']);
-    Route::put('/classes/{id}',[ClassController::class,'update']);
-    Route::delete('/classes/{id}',[ClassController::class,'delete']);
+    // // Class
+    // Route::get('/classes',[ClassController::class,'index']);
+    // Route::get('/classes/{id}',[ClassController::class,'show']);
+    // Route::post('/classes',[ClassController::class,'store']);
+    // Route::put('/classes/{id}',[ClassController::class,'update']);
+    // Route::delete('/classes/{id}',[ClassController::class,'delete']);
     
     // Building
     Route::get('/buildings',[BuildingController::class,'index']);
@@ -85,3 +85,9 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
 
 
 
+    // Class
+    Route::get('/classes',[ClassController::class,'index']);
+    Route::get('/classes/{id}',[ClassController::class,'show']);
+    Route::post('/classes',[ClassController::class,'store']);
+    Route::put('/classes/{id}',[ClassController::class,'update']);
+    Route::delete('/classes/{id}',[ClassController::class,'delete']);
