@@ -16,15 +16,18 @@ class ClassController extends Controller
 {
     public function index(Request $request)
     {         
-            $session_id = $request->query('session');
+            $session_id = $request->query('session_id');
+            $page = $request->query('page');
 
             $classes =  DB::table('classes')
             ->leftJoin('sessions', 'sessions.id', '=', 'classes.session_id')
             ->select('classes.*', 'sessions.session_name')
             ->when($session_id,function($query,$session_id){
                 $query->where('session_id',$session_id);
-            })->orderBy('id','desc')
-            ->paginate(10);
+            });
+
+            $classes = $page ? $classes->orderBy('id','desc')->paginate(10) 
+                             :$classes->orderBy('id','desc')->get();
             
             return response()->json($classes);
     }

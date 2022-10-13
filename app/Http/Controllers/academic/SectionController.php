@@ -21,10 +21,17 @@ class SectionController extends Controller
             $session_id  = $request->query('session_id');
             $class_id    = $request->query('class_id');
 
-            $classes = DB::table('sections')
+            $sections = DB::table('sections')
                         ->leftJoin( 'classes',  'classes.id',  '=', 'sections.class_id' )
                         ->leftJoin( 'sessions', 'sessions.id', '=', 'sections.session_id' )
-                        ->select('sections.*', 'classes.class_name', 'sessions.session_name')
+                        ->leftJoin( 'rooms', 'rooms.id', '=', 'sections.room_id' )
+                        ->leftJoin( 'buildings', 'buildings.id', '=', 'rooms.building_id' )
+                        ->select(
+                            'sections.*', 'classes.class_name', 
+                            'sessions.session_name',
+                            'rooms.room_no',
+                            'buildings.building_name'
+                        )
                         ->when($session_id,function($query,$session_id){
                             $query->where('sections.session_id',$session_id);
                         })
@@ -33,9 +40,10 @@ class SectionController extends Controller
                         });
 
 
-            $classes = $page ? $classes->paginate(10):$classes->get();
+            $sections = $page ? $sections->orderBy('id','desc')->paginate(10) 
+                             :$sections->orderBy('id','desc')->get();
             
-            return response()->json($classes);
+            return response()->json($sections);
     }
 
     
