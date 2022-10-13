@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('section_name');
-            $table->string('class_id');
-            $table->string('session_id');
-            $table->string('room_id')->nullable();
+            $table->bigInteger('class_id');
+            $table->bigInteger('session_id');
+            $table->bigInteger('room_id')->nullable();
 
             $table->unique(['section_name','class_id','session_id']);
         });

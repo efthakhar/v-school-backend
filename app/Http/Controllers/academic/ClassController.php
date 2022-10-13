@@ -39,66 +39,74 @@ class ClassController extends Controller
             return response()->json($class);
     }
 
-    // public function store(Request $request)
-    // {   
-    //         $validator = Validator::make($request->all(), 
-    //         [
-    //             'class_name' => 
-    //             [
-    //                 new CombineUnique(
-    //                     [
-    //                         ['class_name',$request->class_name],
-    //                         ['session_id',$request->session_id],
-    //                     ],
-    //                     'classes',
-    //                     'There can not two same name class under same session'
-    //                 ),
-    //                 'max:255',
-    //                 'required',
+    public function store(Request $request)
+    {   
+
+                try{
+
+
+                    $validator = Validator::make($request->all(), 
+                    [
+                        'class_name' => 
+                        [
+                            new CombineUnique(
+                                [
+                                    ['class_name',$request->class_name],
+                                    ['session_id',$request->session_id],
+                                ],
+                                'classes',
+                                'There can not two same name class under same session'
+                            ),
+                            'max:255',
+                            'required',
+                            
+                        ],
+        
+                        'session_id' => 'required',
+                    ],
+                    [ 
+                        'class_name.required' => ':attribute field can not be empty',
+                        'session_id.required' => 'session name is required',
+                    ]
+                    );
+
+                    if($validator->fails()) {
+                       throw new ValidationException($validator);
+                    }
+
+                    $created = DB::table('classes')->insert([
+                        'class_name' => $request->class_name,  
+                        'session_id' => $request->session_id,  
+                    ]);
+
                     
-    //             ],
 
-    //             'session_id' => 'required',
-    //         ],
-    //         [ 
-    //             'class_name.required' => ':attribute field can not be empty',
-    //             'session_id.required' => 'session name is required',
-    //         ]
-    //         );
+                    return response()->json([
+                        'success' => true, 
+                        'message' => 'class created successfully'
+                    ],201);
 
-    //         if(!$validator->fails())
-    //         {
+                }catch(ValidationException $e){
 
-    //             try{
-    //                 $created = DB::table('classes')->insert([
-    //                     'class_name' => $request->class_name,  
-    //                     'session_id' => $request->session_id,  
-    //                 ]);
-
-    //                 return response()->json([
-    //                     'success' => true, 
-    //                     'message' => 'class created successfully'
-    //                 ],201);
-
-    //             }catch(Exception $e){
-
-    //                 return response()->json([
-    //                     'success' => false, 
-    //                     'message' => 'class fail to create. Databse error occured',
-    //                     'errors'  => $e
-    //                 ],500);
-    //             }
                 
-    //         }else{
+                    return response()->json([
+                        'success' => false, 
+                        'message' => 'validation error occured',
+                        'errors'  => $e->errors(),
+                    ],422);
+                   
 
-    //             return response()->json([
-    //                 'success' => false, 
-    //                 'message' => 'validation error occured',
-    //                 'errors'  => $validator->errors(),
-    //             ],401);
-
-    //         }
-    // }
+                }catch(QueryException $e){
+                   
+                    return response()->json([
+                        'success' => false, 
+                        'message' => 'class fail to create since Databse Query error occured',
+                        'errors'  => $e->errorInfo
+                    ],500);
+                }
+                
+            
+    }
 
     public function update(Request $request,$class_id)
     {   
@@ -174,77 +182,5 @@ class ClassController extends Controller
         }           
     }
 
-
-
-
-
-    public function store(Request $request)
-    {   
-
-                try{
-
-
-                    $validator = Validator::make($request->all(), 
-                    [
-                        'class_name' => 
-                        [
-                            new CombineUnique(
-                                [
-                                    ['class_name',$request->class_name],
-                                    ['session_id',$request->session_id],
-                                ],
-                                'classes',
-                                'There can not two same name class under same session'
-                            ),
-                            'max:255',
-                            'required',
-                            
-                        ],
-        
-                        'session_id' => 'required',
-                    ],
-                    [ 
-                        'class_name.required' => ':attribute field can not be empty',
-                        'session_id.required' => 'session name is required',
-                    ]
-                    );
-
-                    if($validator->fails()) {
-                       throw new ValidationException($validator);
-                    }
-
-                    $created = DB::table('classes')->insert([
-                        'class_name' => $request->class_name,  
-                        'session_id' => $request->session_id,  
-                    ]);
-
-                    
-
-                    return response()->json([
-                        'success' => true, 
-                        'message' => 'class created successfully'
-                    ],201);
-
-                }catch(ValidationException $e){
-
-                
-                    return response()->json([
-                        'success' => false, 
-                        'message' => 'validation error occured',
-                        'errors'  => $e->errors(),
-                    ],422);
-                   
-
-                }catch(QueryException $e){
-                   
-                    return response()->json([
-                        'success' => false, 
-                        'message' => 'class fail to create since Databse Query error occured',
-                        'errors'  => $e->errorInfo
-                    ],500);
-                }
-                
-            
-    }
 
 }

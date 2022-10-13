@@ -3,6 +3,7 @@
 use App\Http\Controllers\academic\BuildingController;
 use App\Http\Controllers\academic\ClassController;
 use App\Http\Controllers\academic\RoomController;
+use App\Http\Controllers\academic\SectionController;
 use App\Http\Controllers\academic\SessionController;
 use App\Http\Controllers\controluser\PermissionController;
 use App\Http\Controllers\controluser\RoleController;
@@ -54,16 +55,16 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::delete('/sessions/{id}',[SessionController::class,'delete']);
 
     
-    // // Class
-    // Route::get('/classes',[ClassController::class,'index']);
-    // Route::get('/classes/{id}',[ClassController::class,'show']);
-    // Route::post('/classes',[ClassController::class,'store']);
-    // Route::put('/classes/{id}',[ClassController::class,'update']);
-    // Route::delete('/classes/{id}',[ClassController::class,'delete']);
+    // Class
+    Route::get('/classes',[ClassController::class,'index']);
+    Route::get('/classes/{id}',[ClassController::class,'show']);
+    Route::post('/classes',[ClassController::class,'store']);
+    Route::put('/classes/{id}',[ClassController::class,'update']);
+    Route::delete('/classes/{id}',[ClassController::class,'delete']);
     
     // Building
     Route::get('/buildings',[BuildingController::class,'index']);
-    Route::get('/buildings/all',[BuildingController::class,'getAll']);
+    Route::get('/buildings/list',[BuildingController::class,'getAll']);
     Route::get('/buildings/{id}',[BuildingController::class,'show']);
     Route::post('/buildings',[BuildingController::class,'store']);
     Route::put('/buildings/{id}',[BuildingController::class,'update']);
@@ -81,13 +82,9 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
 
 });
 
-    
-
-
-
-    // Class
-    Route::get('/classes',[ClassController::class,'index']);
-    Route::get('/classes/{id}',[ClassController::class,'show']);
-    Route::post('/classes',[ClassController::class,'store']);
-    Route::put('/classes/{id}',[ClassController::class,'update']);
-    Route::delete('/classes/{id}',[ClassController::class,'delete']);
+// Section    
+Route::get('/sections',[SectionController::class,'index']);
+Route::get('/sections/{id}',[SectionController::class,'show']);
+Route::post('/sections',[SectionController::class,'store']);
+Route::put('/sections/{id}',[SectionController::class,'update']);
+Route::delete('/sections/{id}',[SectionController::class,'delete']);

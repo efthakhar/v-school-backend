@@ -4,6 +4,7 @@ namespace App\Http\Controllers\academic;
 
 use App\Http\Controllers\Controller;
 use App\Rules\CombineUnique;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -14,10 +15,10 @@ class RoomController extends Controller
     public function index()
     {
             $rooms =  DB::table('rooms')
-                        ->join('buildings','buildings.id','=','rooms.building_id')
+                        ->leftJoin('buildings','buildings.id','=','rooms.building_id')
                         ->select('rooms.*','buildings.building_name')
                         ->orderBy('id','desc')
-                        ->paginate(3);
+                        ->paginate(10);
             
             return response()->json($rooms);
     }
@@ -104,9 +105,9 @@ class RoomController extends Controller
 
     public function update(Request $request,$room_id)
     {     
-
+        
         $validator = Validator::make($request->all(), [
-
+           
             'room_no' =>
             [
                 new CombineUnique(
@@ -128,6 +129,7 @@ class RoomController extends Controller
        
         if(!$validator->fails()){
 
+            try{
             $created = DB::table('rooms')
             ->where('id',$room_id)
             ->update([
@@ -136,14 +138,14 @@ class RoomController extends Controller
                 'building_id' => $request->building_id,              
             ]);
     
-            if($created){
+           
     
                 return response()->json([
                     'success' => true, 
                     'message' => 'room updated successfully'
                 ],201);
     
-            }else{
+            }catch(Exception $e){
     
                 return response()->json([
                     'success' => false, 
