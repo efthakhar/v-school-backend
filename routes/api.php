@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\academic\BuildingController;
 use App\Http\Controllers\academic\ClassController;
+use App\Http\Controllers\academic\DepartmentController;
 use App\Http\Controllers\academic\RoomController;
 use App\Http\Controllers\academic\SectionController;
 use App\Http\Controllers\academic\SessionController;
@@ -102,3 +103,10 @@ Route::get('/sections/{id}',[SectionController::class,'show']);
 Route::post('/sections',[SectionController::class,'store']);
 Route::put('/sections/{id}',[SectionController::class,'update']);
 Route::delete('/sections/{id}',[SectionController::class,'delete']);
+
+// Department 
+Route::get('/departments',[DepartmentController::class,'index']);
+Route::get('/departments/{id}',[DepartmentController::class,'show']);
+Route::post('/departments',[DepartmentController::class,'store']);
+Route::put('/departments/{id}',[DepartmentController::class,'update']);
+Route::delete('/departments/{id}',[DepartmentController::class,'delete']);
