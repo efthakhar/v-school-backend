@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="fxuSIED1SjDL8QW2SAAC" name="academic">
-        <mxGraphModel dx="836" dy="361" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="1048" dy="478" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -133,8 +133,30 @@
             </root>
         </mxGraphModel>
     </diagram>
+    <diagram name="academic 2" id="MiR4Vayc1N9uFbzYnZmT">
+        <mxGraphModel dx="1048" dy="478" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="O4bASsLXArdWHIE6yruq-0"/>
+                <mxCell id="O4bASsLXArdWHIE6yruq-1" parent="O4bASsLXArdWHIE6yruq-0"/>
+                <mxCell id="O4bASsLXArdWHIE6yruq-2" value="departments" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;labelBackgroundColor=none;fontColor=#ffffff;strokeColor=#001DBC;strokeWidth=2;fillColor=#0050ef;fontSize=19;" vertex="1" parent="O4bASsLXArdWHIE6yruq-1">
+                    <mxGeometry x="27" y="43" width="296" height="140" as="geometry">
+                        <mxRectangle x="27" y="43" width="208" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="O4bASsLXArdWHIE6yruq-3" value="pk   id (bigint)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="O4bASsLXArdWHIE6yruq-2">
+                    <mxGeometry y="30" width="296" height="36" as="geometry"/>
+                </mxCell>
+                <mxCell id="O4bASsLXArdWHIE6yruq-4" value="pk   department_name (string)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="O4bASsLXArdWHIE6yruq-2">
+                    <mxGeometry y="66" width="296" height="37" as="geometry"/>
+                </mxCell>
+                <mxCell id="1yA0DSxzN62pk3_J9jqZ-0" value="      department_head_id (bigint)*" style="text;strokeColor=#000000;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;labelBackgroundColor=none;fontColor=#000000;fontSize=19;" vertex="1" parent="O4bASsLXArdWHIE6yruq-2">
+                    <mxGeometry y="103" width="296" height="37" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
     <diagram name="users" id="ml-2fUxIoprNPsS3JgLi">
-        <mxGraphModel dx="812" dy="292" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="1048" dy="478" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="qAkqCAme-v-bCsA5P8cd-0"/>
                 <mxCell id="qAkqCAme-v-bCsA5P8cd-1" parent="qAkqCAme-v-bCsA5P8cd-0"/>

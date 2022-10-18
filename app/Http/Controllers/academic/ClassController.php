@@ -27,7 +27,7 @@ class ClassController extends Controller
             });
 
             $classes = $page ? $classes->orderBy('id','desc')->paginate(10) 
-                             :$classes->orderBy('id','desc')->get();
+                               :$classes->orderBy('id','desc')->get();
             
             return response()->json($classes);
     }

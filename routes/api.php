@@ -55,12 +55,12 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
     Route::delete('/sessions/{id}',[SessionController::class,'delete']);
 
     
-    // Class
-    Route::get('/classes',[ClassController::class,'index']);
-    Route::get('/classes/{id}',[ClassController::class,'show']);
-    Route::post('/classes',[ClassController::class,'store']);
-    Route::put('/classes/{id}',[ClassController::class,'update']);
-    Route::delete('/classes/{id}',[ClassController::class,'delete']);
+    // // Class
+    // Route::get('/classes',[ClassController::class,'index']);
+    // Route::get('/classes/{id}',[ClassController::class,'show']);
+    // Route::post('/classes',[ClassController::class,'store']);
+    // Route::put('/classes/{id}',[ClassController::class,'update']);
+    // Route::delete('/classes/{id}',[ClassController::class,'delete']);
         
 
     // // Section    
@@ -89,9 +89,16 @@ Route::group(['middleware' =>'auth:sanctum'], function() {
 
 
 });
-    // Section    
-    Route::get('/sections',[SectionController::class,'index']);
-    Route::get('/sections/{id}',[SectionController::class,'show']);
-    Route::post('/sections',[SectionController::class,'store']);
-    Route::put('/sections/{id}',[SectionController::class,'update']);
-    Route::delete('/sections/{id}',[SectionController::class,'delete']);
+ // Class
+ Route::get('/classes',[ClassController::class,'index']);
+ Route::get('/classes/{id}',[ClassController::class,'show']);
+ Route::post('/classes',[ClassController::class,'store']);
+ Route::put('/classes/{id}',[ClassController::class,'update']);
+ Route::delete('/classes/{id}',[ClassController::class,'delete']);
+ 
+// Section    
+Route::get('/sections',[SectionController::class,'index']);
+Route::get('/sections/{id}',[SectionController::class,'show']);
+Route::post('/sections',[SectionController::class,'store']);
+Route::put('/sections/{id}',[SectionController::class,'update']);
+Route::delete('/sections/{id}',[SectionController::class,'delete']);

@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('sections', function (Blueprint $table) {
@@ -18,17 +14,15 @@ return new class extends Migration
             $table->string('section_name');
             $table->bigInteger('class_id');
             $table->bigInteger('session_id');
+
+            $table->bigInteger('building_id')->nullable();
             $table->bigInteger('room_id')->nullable();
 
             $table->unique(['section_name','class_id','session_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+   
     public function down()
     {
         Schema::dropIfExists('sections');

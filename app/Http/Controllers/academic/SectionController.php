@@ -41,7 +41,7 @@ class SectionController extends Controller
 
 
             $sections = $page ? $sections->orderBy('id','desc')->paginate(10) 
-                             :$sections->orderBy('id','desc')->get();
+                                :$sections->orderBy('id','desc')->get();
             
             return response()->json($sections);
     }
