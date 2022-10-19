@@ -12,11 +12,19 @@ use Illuminate\Validation\ValidationException;
 
 class DepartmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+            $page = $request->query('page');
+            $search_string = $request->query('department_name');
+
             $departments =  DB::table('departments')
-                            ->orderBy('id','desc')
-                            ->get();        
+                            ->when($search_string,function($query,$search_string){
+                                $query->where('department_name','LIKE', '%'.$search_string.'%');
+                            });
+                            
+            $departments = $page ? $departments->orderBy('id','desc')->paginate(10) 
+            :$departments->orderBy('id','desc')->get();
+
             return response()->json($departments);
     }
     public function show($department_id)
